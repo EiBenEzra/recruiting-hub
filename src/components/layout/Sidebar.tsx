@@ -41,8 +41,8 @@ export function Sidebar() {
       <div className="flex h-16 items-center gap-3 border-b border-border px-6">
         <BrainCircuit className="h-6 w-6 text-primary" />
         <div className="leading-tight">
-          <p className="text-sm font-semibold tracking-tight">Recruiting</p>
-          <p className="text-xs text-muted-foreground">Intelligence Hub</p>
+          <p className="text-sm font-semibold tracking-tight">Hub de Reclutamiento</p>
+          <p className="text-xs font-bold text-primary">R</p>
         </div>
       </div>
 

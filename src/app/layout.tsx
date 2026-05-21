@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 })
 
 export const metadata: Metadata = {
-  title: 'Recruiting Intelligence Hub',
+  title: 'Hub de Reclutamiento R',
   description: 'Sistema operativo de recruiting potenciado por IA',
 }
 
