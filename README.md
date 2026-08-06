@@ -1,36 +1,61 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Hub de Reclutamiento
 
-## Getting Started
+Plataforma interna de reclutamiento construida sobre Next.js y Supabase, con generación asistida por IA para informes de candidatos, feedback estructurado y búsqueda de talento.
 
-First, run the development server:
+## Módulos
+
+| Módulo | Qué hace |
+|---|---|
+| **Sourcing** | Genera booleanos de búsqueda para LinkedIn Recruiter, Google X-Ray y GitHub a partir del perfil del cargo |
+| **Reports** | Redacta informes de evaluación de candidatos y los exporta a DOCX |
+| **Feedback** | Estructura feedback de entrevistas con formato consistente |
+| **SST** | Módulo de seguridad y salud en el trabajo |
+| **Admin** | Gestión de prompts, versiones y configuración de la organización |
+
+## Stack
+
+- **Next.js** (App Router) + React + TypeScript
+- **Supabase** — Postgres, auth y row-level security
+- **Vercel AI SDK** con proveedores intercambiables: Anthropic, OpenAI y Google
+- **Tailwind CSS** + Base UI
+- **docx** para exportación de informes
+
+## Configuración
+
+Copia el archivo de ejemplo y completa tus credenciales:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+cp .env.example .env.local
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+| Variable | Para qué |
+|---|---|
+| `NEXT_PUBLIC_SUPABASE_URL` | URL del proyecto Supabase |
+| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Clave pública del cliente |
+| `SUPABASE_SERVICE_ROLE_KEY` | Clave de servidor — **nunca la expongas al cliente** |
+| `SUPABASE_MGMT_TOKEN` | Token de Management API, solo para los scripts de seed |
+| `AI_PROVIDER` | `anthropic`, `openai` o `google` |
+| `ANTHROPIC_API_KEY` / `OPENAI_API_KEY` / `GOOGLE_GENERATIVE_AI_API_KEY` | Según el proveedor elegido |
+| `AI_MODEL_REPORTS` / `AI_MODEL_FEEDBACK` / `AI_MODEL_SOURCING` | Modelo por módulo |
+| `NEXT_PUBLIC_APP_URL` | URL base de la app |
+| `NEXT_PUBLIC_ORG_ID` | Identificador de la organización |
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Ningún `.env` se versiona. Si necesitas rotar credenciales, hazlo desde el panel de cada proveedor.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Desarrollo
 
-## Learn More
+```bash
+npm install
+npm run dev
+```
 
-To learn more about Next.js, take a look at the following resources:
+Las migraciones de base de datos están en `supabase/migrations/`.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Scripts
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+| Comando | Qué hace |
+|---|---|
+| `npm run dev` | Servidor de desarrollo |
+| `npm run build` | Build de producción |
+| `npm run type-check` | Verificación de tipos |
+| `npm run seed:prompts` | Carga las versiones de prompts en la base |
