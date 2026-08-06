@@ -51,7 +51,7 @@ export async function POST(req: NextRequest) {
 
     const doc = new Document({
       sections: [{ properties: {}, children }],
-      creator: 'Hub de Reclutamiento R',
+      creator: 'Hub de Reclutamiento',
       title: 'Informe de Entrevista',
     })
 

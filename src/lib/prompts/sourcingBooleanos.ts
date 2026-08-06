@@ -74,7 +74,7 @@ Devuelve exactamente:
         technologies: ['Python', 'FastAPI', 'PostgreSQL', 'AWS'],
         location: 'Chile',
         industries: ['Fintech', 'E-commerce'],
-        exclusions: ['Falabella', 'Ripley'],
+        exclusions: ['Empresa A', 'Empresa B'],
       },
       output: {
         linkedin: '(title:"Backend Engineer" OR title:"Software Engineer" OR title:"Python Developer") AND (Python AND (FastAPI OR Django OR Flask)) AND (AWS OR GCP) AND Chile',

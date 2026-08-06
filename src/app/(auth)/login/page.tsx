@@ -41,7 +41,7 @@ export default function LoginPage() {
             <BrainCircuit className="h-7 w-7 text-primary" />
           </div>
         </div>
-        <CardTitle className="text-xl">Hub de Reclutamiento R</CardTitle>
+        <CardTitle className="text-xl">Hub de Reclutamiento</CardTitle>
         <CardDescription>Ingresa con tu cuenta del equipo</CardDescription>
       </CardHeader>
       <CardContent>
