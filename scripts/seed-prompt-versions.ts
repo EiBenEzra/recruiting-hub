@@ -1,6 +1,6 @@
 import { ALL_PROMPTS } from '../src/lib/prompts/index'
 
-const MGMT_TOKEN = 'SUPABASE_MGMT_TOKEN_REMOVIDO'
+const MGMT_TOKEN = process.env.SUPABASE_MGMT_TOKEN ?? ''
 const PROJECT_REF = 'ijupbnbdlvnynqbwyxii'
 const ADMIN_USER_ID = '2fccb721-4a0b-4652-8a66-575cb66ddf8f'
 
