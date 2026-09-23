@@ -11,9 +11,10 @@ const STATUS_LABELS: Record<string, { label: string; variant: 'default' | 'secon
 
 interface ReportHistoryProps {
   reports: Partial<Report>[]
+  onOpen?: (id: string) => void
 }
 
-export function ReportHistory({ reports }: ReportHistoryProps) {
+export function ReportHistory({ reports, onOpen }: ReportHistoryProps) {
   if (reports.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center rounded-lg border border-dashed py-16 text-center">
@@ -29,7 +30,8 @@ export function ReportHistory({ reports }: ReportHistoryProps) {
         return (
           <div
             key={report.id}
-            className="flex items-center justify-between rounded-lg border bg-card px-4 py-3 hover:bg-muted/30 transition-colors"
+            onClick={() => report.id && onOpen?.(report.id)}
+            className="flex items-center justify-between rounded-lg border bg-card px-4 py-3 hover:bg-muted/30 transition-colors cursor-pointer"
           >
             <div className="space-y-0.5 min-w-0">
               <p className="text-sm font-medium truncate">

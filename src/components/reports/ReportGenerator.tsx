@@ -15,6 +15,7 @@ interface ReportGeneratorProps {
 
 export function ReportGenerator({ templates, history }: ReportGeneratorProps) {
   const router = useRouter()
+  const [activeTab, setActiveTab] = useState('generate')
   const [generatedReport, setGeneratedReport] = useState<{
     sections: Record<string, { title: string; content: string; edited: boolean }>
     reportId: string
@@ -26,8 +27,16 @@ export function ReportGenerator({ templates, history }: ReportGeneratorProps) {
     router.refresh()
   }
 
+  async function handleOpenReport(id: string) {
+    const res = await fetch(`/api/reports/${id}`)
+    if (!res.ok) return
+    const data = await res.json()
+    setGeneratedReport(data)
+    setActiveTab('generate')
+  }
+
   return (
-    <Tabs defaultValue="generate" className="space-y-6">
+    <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
       <TabsList>
         <TabsTrigger value="generate">Generar informe</TabsTrigger>
         <TabsTrigger value="history">
@@ -55,7 +64,7 @@ export function ReportGenerator({ templates, history }: ReportGeneratorProps) {
       </TabsContent>
 
       <TabsContent value="history">
-        <ReportHistory reports={history} />
+        <ReportHistory reports={history} onOpen={handleOpenReport} />
       </TabsContent>
     </Tabs>
   )
