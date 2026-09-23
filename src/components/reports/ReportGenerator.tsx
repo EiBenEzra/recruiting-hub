@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { useRouter } from 'next/navigation'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { ReportForm } from './ReportForm'
 import { ReportViewer } from './ReportViewer'
@@ -13,11 +14,17 @@ interface ReportGeneratorProps {
 }
 
 export function ReportGenerator({ templates, history }: ReportGeneratorProps) {
+  const router = useRouter()
   const [generatedReport, setGeneratedReport] = useState<{
     sections: Record<string, { title: string; content: string; edited: boolean }>
     reportId: string
     roleType: string
   } | null>(null)
+
+  function handleGenerated(report: typeof generatedReport) {
+    setGeneratedReport(report)
+    router.refresh()
+  }
 
   return (
     <Tabs defaultValue="generate" className="space-y-6">
@@ -42,7 +49,7 @@ export function ReportGenerator({ templates, history }: ReportGeneratorProps) {
         ) : (
           <ReportForm
             templates={templates}
-            onGenerated={setGeneratedReport}
+            onGenerated={handleGenerated}
           />
         )}
       </TabsContent>
