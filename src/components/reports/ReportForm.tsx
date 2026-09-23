@@ -74,7 +74,14 @@ export function ReportForm({ templates, onGenerated }: ReportFormProps) {
       <div className="grid gap-4 sm:grid-cols-3">
         <div className="space-y-2">
           <Label>Tipo de rol *</Label>
-          <Select onValueChange={(v) => v && setValue('roleType', v as GenerateReportInput['roleType'])}>
+          <Select onValueChange={(v) => {
+            if (!v) return
+            const tpl = templates.find(t => t.role_type === v)
+            if (tpl) {
+              setValue('roleType', v as GenerateReportInput['roleType'])
+              setValue('templateId', tpl.id)
+            }
+          }}>
             <SelectTrigger>
               <SelectValue placeholder="Selecciona tipo" />
             </SelectTrigger>
